@@ -1,4 +1,4 @@
-# Laravel 11 with a Docker PHP Image
+# صحن لاراڤل إصدار 11 - جاهز للقلي Boilerplate
 
 A demo repo for deploying a Laravel PHP application on [Render](https://render.com) using Docker. You can follow the getting started tutorial [here](https://render.com/docs/deploy-php-laravel-docker).
 
