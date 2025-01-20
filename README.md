@@ -1,22 +1,23 @@
 # صحن لاراڤل إصدار 11 - جاهز للقلي Boilerplate
 
-A demo repo for deploying a Laravel PHP application on [Render](https://render.com) using Docker. You can follow the getting started tutorial [here](https://render.com/docs/deploy-php-laravel-docker).
+هذا مستودع تجريبي لنشر تطبيق Laravel PHP على [Render](https://render.com) باستخدام Docker. يمكنك اتباع دليل البدء [هنا](https://render.com/docs/deploy-php-laravel-docker).
 
+## النشر
 
-## Deployment
+1. [أنشئ](https://dashboard.render.com/new/database) قاعدة بيانات PostgreSQL جديدة في Render، ثم انسخ رابط قاعدة البيانات الداخلي لاستخدامه أدناه.
+2. قم بعمل Fork لهذا المستودع إلى حساب GitHub الخاص بك.
+3. أنشئ خدمة ويب جديدة على Render، ومنح تطبيق GitHub في Render إذن الوصول إلى المستودع الجديد.
+4. اختر **Docker** للبيئة، ثم أضف متغيرات البيئة التالية ضمن قسم *Advanced*:
 
-1. [Create](https://dashboard.render.com/new/database) a new PostgreSQL database on Render and copy the internal DB URL to use below.
+   | المفتاح            | القيمة                                    |
+   | ------------------ | ----------------------------------------- |
+   | `APP_KEY`         | انسخ ناتج الأمر `php artisan key:generate --show` |
+   | `DATABASE_URL`    | رابط قاعدة البيانات الداخلي التي أنشأتها سابقًا.    |
+   | `DB_CONNECTION`   | `pgsql`                                  |
 
-2. Fork this repo to your own GitHub account.
+بذلك ستكون نسخة Laravel 11 جاهزة على رابط Render الخاص بك بمجرد انتهاء البناء. يمكنك اختبارها بالتسجيل وتسجيل الدخول.
 
-3. Create a new **Web Service** on Render, and give Render's GitHub app permission to access your new repo.
-
-4. Select `Docker` for the environment, and add the following environment variable under the *Advanced* section:
-
-   | Key             | Value           |
-   | --------------- | --------------- |
-   | `APP_KEY`  | Copy the output of `php artisan key:generate --show` |
-   | `DATABASE_URL`  | The **internal database url** for the database you created above. |
-   | `DB_CONNECTION`  | `pgsql` |
-
-That's it! Your Laravel 11 app will be live on your Render URL as soon as the build finishes. You can test it out by registering and logging in.
+## مزيد من التوضيح
+- تأكد من حصولك على المفتاح الآمن (APP_KEY) قبل نشر التطبيق.
+- عند إعداد PostgreSQL، استخدم معلومات الدخول الصحيحة من Render.
+- لتخصيص إعدادات Docker، عدّل ملف `Dockerfile` حسب حاجتك.
