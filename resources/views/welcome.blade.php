@@ -182,9 +182,73 @@
             .plane3 {
                 transform: rotateX(90deg) rotateY(75deg) translateZ(100px);
             }
+
+            .aurora-effect {
+                position: fixed;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                z-index: 0;
+                overflow: hidden;
+            }
+
+            .aurora-effect .color {
+                position: absolute;
+                filter: blur(150px);
+                opacity: 0.5;
+            }
+
+            .aurora-effect .color:nth-child(1) {
+                background: #ff2d20;
+                width: 600px;
+                height: 600px;
+                top: -50%;
+                left: 25%;
+                animation: aurora-move 15s infinite;
+            }
+
+            .aurora-effect .color:nth-child(2) {
+                background: #00ff88;
+                width: 500px;
+                height: 500px;
+                bottom: -10%;
+                right: 25%;
+                animation: aurora-move 20s infinite reverse;
+            }
+
+            .aurora-effect .color:nth-child(3) {
+                background: #2d3748;
+                width: 300px;
+                height: 300px;
+                bottom: 50%;
+                left: 50%;
+                animation: aurora-move 25s infinite;
+            }
+
+            @keyframes aurora-move {
+                0% {
+                    transform: translate(0, 0) rotate(0deg);
+                }
+                50% {
+                    transform: translate(-15%, 15%) rotate(180deg);
+                }
+                100% {
+                    transform: translate(0, 0) rotate(360deg);
+                }
+            }
+
+            .scene {
+                background: none;
+            }
         </style>
     </head>
     <body>
+        <div class="aurora-effect">
+            <div class="color"></div>
+            <div class="color"></div>
+            <div class="color"></div>
+        </div>
         <div class="scene">
             <div class="plane plane1"></div>
             <div class="plane plane2"></div>
@@ -253,7 +317,7 @@
                 // logo animation
                 const logo = document.querySelector('.title');
                 gsap.from(logo, {
-                    duration: 1.5,
+                    duration: 2.5,
                     opacity: 0,
                     y: -50,
                     ease: 'power4.out'
@@ -262,7 +326,7 @@
                 // links animation
                 const links = document.querySelectorAll('.links > a');
                 gsap.from(links, {
-                    duration: 1.5,
+                    duration: 2.5,
                     opacity: 0,
                     y: 50,
                     ease: 'power4.out',
@@ -272,11 +336,25 @@
                 // scene animation
                 const scene = document.querySelector('.scene');
                 gsap.from(scene, {
-                    duration: 1.5,
+                    duration: 2.5,
                     opacity: 0,
                     ease: 'power4.out'
                 });                
 
+                // Add aurora animation
+                const colors = document.querySelectorAll('.aurora-effect .color');
+                colors.forEach((color, index) => {
+                    gsap.to(color, {
+                        duration: 15 + index * 5,
+                        rotate: 360,
+                        scale: 1.2,
+                        x: "random(-25%, 25%)",
+                        y: "random(-25%, 25%)",
+                        repeat: -1,
+                        ease: "none",
+                        yoyo: true
+                    });
+                });
 
             </script>
 
