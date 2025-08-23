@@ -72,7 +72,58 @@ class HandlerTest extends TestCase
             'Out of memory (allocated 2097152)',
             'PHP Fatal error: memory exhausted',
             'Cannot allocate memory for string',
-            'Maximum execution time exceeded'
+            'Maximum execution time exceeded',
+            'Fatal error: Out of memory',
+            'PHP Fatal error: Allowed memory size',
+            'memory limit exceeded',
+            'stack overflow detected',
+            'Segmentation fault'
+        ];
+        
+        foreach ($memoryErrorMessages as $message) {
+            $exception = new Exception($message);
+            $handler->report($exception);
+        }
+        
+        // Assert that critical log was called for each memory error
+        Log::shouldHaveReceived('critical')
+            ->with('Memory Error Detected', \Mockery::type('array'))
+            ->times(count($memoryErrorMessages));
+    }
+
+    /**
+     * Test that empty exception messages don't cause issues.
+     *
+     * @return void
+     */
+    public function testEmptyExceptionMessage()
+    {
+        $handler = new Handler($this->app);
+        
+        // Create an exception with empty message
+        $emptyException = new Exception('');
+        
+        // Report the exception
+        $handler->report($emptyException);
+        
+        // Assert that the critical log was NOT called for memory errors
+        Log::shouldNotHaveReceived('critical');
+    }
+
+    /**
+     * Test case-insensitive memory error detection.
+     *
+     * @return void
+     */
+    public function testCaseInsensitiveMemoryErrorDetection()
+    {
+        $handler = new Handler($this->app);
+        
+        $memoryErrorMessages = [
+            'ALLOWED MEMORY SIZE OF 256M EXHAUSTED',
+            'out of memory (allocated 2097152)',
+            'Memory Exhausted',
+            'STACK OVERFLOW'
         ];
         
         foreach ($memoryErrorMessages as $message) {
