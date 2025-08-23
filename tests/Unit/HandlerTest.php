@@ -54,8 +54,8 @@ class HandlerTest extends TestCase
         $handler->report($regularException);
         
         // Assert that the critical log was NOT called for memory errors
-        Log::shouldNotHaveReceived('critical')
-            ->with('Memory Error Detected', \Mockery::any());
+        // For "shouldNotHaveReceived", we need to be more specific about what we're testing
+        Log::shouldNotHaveReceived('critical');
     }
 
     /**
