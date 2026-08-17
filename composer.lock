@@ -1056,7 +1056,6 @@
         },
         {
             "name": "laravel/framework",
-<<<<<<< HEAD
             "version": "v11.44.7",
             "source": {
                 "type": "git",
@@ -1067,18 +1066,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/framework/zipball/00bc6ac91a6d577bf051c18ddaa638c0d221e1c7",
                 "reference": "00bc6ac91a6d577bf051c18ddaa638c0d221e1c7",
-=======
-            "version": "v11.44.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laravel/framework.git",
-                "reference": "0883d4175f4e2b5c299e7087ad3c74f2ce195c6d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/0883d4175f4e2b5c299e7087ad3c74f2ce195c6d",
-                "reference": "0883d4175f4e2b5c299e7087ad3c74f2ce195c6d",
->>>>>>> origin/master
                 "shasum": ""
             },
             "require": {
@@ -1280,11 +1267,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-<<<<<<< HEAD
             "time": "2025-04-25T12:40:47+00:00"
-=======
-            "time": "2025-03-05T15:34:10+00:00"
->>>>>>> origin/master
         },
         {
             "name": "laravel/prompts",
